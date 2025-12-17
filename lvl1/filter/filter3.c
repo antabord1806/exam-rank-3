@@ -1,8 +1,9 @@
-#define _GNU_SOURCE
-#include <string.h>
+#define _GNU_SOURCE 
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include <errno.h>
 
 int main(int ac, char **av)
@@ -12,7 +13,7 @@ int main(int ac, char **av)
         fprintf(stderr, "ERROR: invalid args\n");
         return (1);
     }
-    char *needle = av[1];
+    char    *needle = av[1];
     size_t needle_len = strlen(needle);
     if (!needle_len)
     {
@@ -20,15 +21,15 @@ int main(int ac, char **av)
         return (1);
     }
     char buffer[1024];
-    char *start = buffer;
     size_t bytes_read;
     while ((bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer))) > 0)
     {
+        char *start = buffer;
         char *found;
-        while ((found = memmem(start, bytes_read, needle, needle_len)) != NULL)
+        while ((found = memmem(start, bytes_read - (start - buffer), needle, needle_len)) != NULL)
         {
-            write(STDOUT_FILENO, start, found - start);
             int i = 0;
+            write(STDOUT_FILENO, start, found - start);
             while (i < needle_len)
             {
                 write(STDOUT_FILENO, "*", 1);
@@ -38,5 +39,5 @@ int main(int ac, char **av)
         }
         write(STDOUT_FILENO, start, bytes_read - (start - buffer));
     }
-    return (0);
+    return 0;
 }
