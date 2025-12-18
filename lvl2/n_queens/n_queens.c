@@ -17,13 +17,13 @@ void    free_all(char **tab)
 
 void print_board(char **board, int n)
 {
-    /*int i = 0;
+    int i = 0;
     while (i < n)
     {
         printf("%s\n", board[i]);
         i++;
     }
-    printf("\n");*/
+    //printf("\n");
     int row = 0;
     int col = 0;
     while (row < n)
@@ -40,6 +40,7 @@ void print_board(char **board, int n)
         }
         row++;
     }
+    printf("\n");
     printf("\n");
 }
 
@@ -58,7 +59,7 @@ char    **building_board(int n)
         //printf("%d creating grid\n", i);
         i++;
     }
-    grid[n] = '\0';
+    grid[n] = NULL;
     i = 0;
     int k = 0;
     while (i < n)
@@ -105,6 +106,7 @@ int move_check(char **board, int n, int row, int col)
         i--;
         j++;
     }
+    return (1);
 }
 
 void  solve_queen(char **board, int n, int row)
