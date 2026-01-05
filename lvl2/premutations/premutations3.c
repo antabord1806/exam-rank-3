@@ -22,9 +22,9 @@ char *swap(char *s, int i, int j)
     return (s);
 }
 
-char *sort(char *str)
+char *sort(char *str, int start)
 {
-    int i = 0;
+    int i = start;
     int j = 1;
     char tmp;
 
@@ -58,6 +58,7 @@ void    solve(char *str, int len, int l)
     while (i < len)
     {
         swap(str, l, i);
+        sort(str, l + 1);
         solve(str, len, l + 1);
         swap(str, l, i);
         i++;
@@ -68,8 +69,8 @@ int main (int argc, char **argv)
 {
     if (argc != 2)
         return (0);
-    char *str = sort(argv[1]);
-    int len = ft_strlen(str);
+    int len = ft_strlen(argv[1]);
+    char *str = sort(argv[1], 0);
     solve(str, len, 0);
     //printf("%s\n", str);
     return (0);
