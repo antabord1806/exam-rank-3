@@ -63,6 +63,13 @@ char    *get_line(void)
             return NULL;
         //printf("tmp: %s", tmp);
     }
+    if (!tmp)
+    {
+        tmp = malloc(1);
+        if (!tmp)
+            return NULL;
+        tmp[0] = '\0';
+    }
     return (tmp);
 }
 
@@ -80,7 +87,11 @@ void    finding_needle(char *hay, char *need, int n_len)
     int j = 0;
     int hay_len = ft_strlen(hay);
 
-    //printf("ola\n");
+    if (!n_len)
+    {
+        write(1, hay, hay_len);
+        return ;
+    }
     while (hay[i])
     {
         if ((starts_here(&hay[i], need)) == n_len)
@@ -101,7 +112,7 @@ int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        printf("rip\n");
+        fprintf(stderr, "ERROR rip\n");
         return (1);
     }
     char *hay = get_line();
