@@ -50,12 +50,12 @@ char    **create_grid(int n)
 void    print_grid(char **grid, int n)
 {
     int i = 0;
-    //write(1, "\n", 1);
-/*     while (i < n)
+    write(1, "\n", 1);
+     while (i < n)
     {
         fprintf(stdout, "%s\n", grid[i]);
         i++;
-    } */
+    }
     //printf("ola\n");
     i = 0;
     int j = 0;
@@ -75,7 +75,7 @@ void    print_grid(char **grid, int n)
         i++;
     }
     fprintf(stdout, "\n");
-    //fprintf(stdout, "\n");
+    fprintf(stdout, "\n");
     return;
 }
 
