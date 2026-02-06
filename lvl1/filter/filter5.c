@@ -25,7 +25,7 @@ char *ft_strjoin(char *tmp, char *buffer)
     if (!buffer)
         return (0);
     int buffer_len = ft_strlen(buffer);
-    char *str = malloc(tmp_len + buffer_len);
+    char *str = malloc(tmp_len + buffer_len + 1);
     if (!str)
         return NULL;
     int i = 0;
@@ -58,10 +58,10 @@ char    *get_line(void)
         //printf("buffer :%s\n", buffer);
         old_tmp = tmp;
         tmp = ft_strjoin(tmp, buffer);
-        if (!tmp)
-            break;
-        //printf("tmp: %s", tmp);
         free(old_tmp);
+        if (!tmp)
+            return NULL;
+        //printf("tmp: %s", tmp);
     }
     return (tmp);
 }
@@ -105,6 +105,11 @@ int main(int argc, char **argv)
         return (1);
     }
     char *hay = get_line();
+    if (!hay)
+    {
+        fprintf(stderr, "ERROR no line");
+        return 1;
+    }
     //printf("ola\n");
     int needle_len = ft_strlen(argv[1]);
     finding_needle(hay, argv[1], needle_len);
