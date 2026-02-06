@@ -98,7 +98,10 @@ void    finding_needle(char *hay, char *need, int n_len)
         {
             int k = 0;
             while (k < n_len)
+            {
                 write(1, "*", 1);
+                k++;
+            }
             i = n_len + i;
         }
         else
